@@ -57,3 +57,12 @@ resource "aws_kms_alias" "key-alias" {
  name          = "alias/nona_bucketstate_key"
  target_key_id = aws_kms_key.nona_bucketstate_key.key_id
 }
+
+# nonasoftware.org
+module "wordpress-ecs" {
+  source  = "atpoirie/wordpress-ecs/aws"
+  version = "1.0.0"
+  ecs_service_subnet_ids = module.vpc.private_subnets
+  lb_subnet_ids = module.vpc.public_subnets
+  db_subnet_group_subnet_ids = module.vpc.database_subnets
+}
